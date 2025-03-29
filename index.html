@@ -3,10 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moja Strona</title>
+    <title>Wybierz opcję</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        .container { max-width: 400px; margin: auto; }
+        select, button { padding: 10px; margin: 10px; font-size: 16px; }
+        .content { 
+            display: none; 
+            margin-top: 20px; 
+            padding: 15px; 
+            border: 1px solid #ccc; 
+            border-radius: 5px; 
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .content.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-    <h1>Witaj na mojej stronie!</h1>
-    <p>To moja pierwsza strona na GitHub Pages.</p>
+    <div class="container">
+        <h1>Wybierz opcję</h1>
+        <select id="optionSelect">
+            <option value="">-- Wybierz --</option>
+            <option value="info">Informacje</option>
+            <option value="portfolio">Portfolio</option>
+            <option value="kontakt">Kontakt</option>
+        </select>
+        <button onclick="showContent()">Pokaż</button>
+        
+        <div id="info" class="content">To jest sekcja informacji o stronie.</div>
+        <div id="portfolio" class="content">Tutaj znajdziesz moje projekty.</div>
+        <div id="kontakt" class="content">Skontaktuj się ze mną pod adresem email@example.com</div>
+    </div>
+
+    <script>
+        function showContent() {
+            let selectedValue = document.getElementById("optionSelect").value;
+            let contents = document.querySelectorAll(".content");
+            
+            contents.forEach(content => {
+                content.classList.remove("show");
+                setTimeout(() => content.style.display = "none", 500);
+            });
+            
+            if (selectedValue) {
+                let selectedContent = document.getElementById(selectedValue);
+                selectedContent.style.display = "block";
+                setTimeout(() => selectedContent.classList.add("show"), 10);
+            }
+        }
+    </script>
 </body>
 </html>
